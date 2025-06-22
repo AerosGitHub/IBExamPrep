@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import terms from '../assets/jsonFiles/terms.json';
-import questions from '../assets/jsonFiles/questions.json';
 import { ref } from 'vue';
+import { questions, terms } from 'components/assets';
 
 const questions_type_chooser = ref(true);
 const displaying = ref({
   question: '',
   answer: '',
-})
+});
 
 function termsChoose() {
   questions_type_chooser.value = false;
-  const randInt = Math.floor(Math.random() * Object.keys(terms).length)
+  const randInt = Math.floor(Math.random() * Object.keys(terms).length);
   displaying.value = {
     question: Object.keys(terms)[randInt]!,
     answer: Object.values(terms)[randInt]!,
-  }
+  };
 }
 
 function questionsChoose() {
   questions_type_chooser.value = false;
-  const randInt = Math.floor(Math.random() * Object.keys(questions).length)
+  const randInt = Math.floor(Math.random() * Object.keys(questions).length);
   displaying.value = {
     question: Object.keys(questions)[randInt]!,
     answer: Object.values(questions)[randInt]!,
-  }
+  };
 }
 </script>
 
@@ -41,18 +40,26 @@ function questionsChoose() {
         height: '100%',
       }"
     >
-      <div class="button big-button" @click="termsChoose">Термины</div>
-      <div class="button big-button" @click="questionsChoose">Определения</div>
+      <div class="button big-button" @click="termsChoose">Термин</div>
+      <div class="button big-button" @click="questionsChoose">Билет</div>
     </div>
     <div
-    v-if="!questions_type_chooser"
+      v-if="!questions_type_chooser"
+      style="display: flex; flex-direction: column; justify-content: center; align-items: center"
     >
-      <div></div>
-      <div class="display-question">
-        {{displaying.question}}
+      <div
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center"
+      >
+        <div class="display-question" style="white-space: pre-wrap">
+          {{ displaying.question }}
+        </div>
+        <div class="display-answer" style="white-space: pre-wrap">
+          {{ displaying.answer }}
+        </div>
       </div>
-      <div class="display-answer">
-        {{displaying.answer}}
+      <div class="buttons-container" style="width: 70%; display: flex; flex-direction: row; justify-content: center; align-items: center">
+        <div class="button big-button" @click="termsChoose">Следующий термин</div>
+        <div class="button big-button" @click="questionsChoose">Следующий билет</div>
       </div>
     </div>
   </div>
@@ -80,5 +87,22 @@ function questionsChoose() {
 .big-button {
   width: 400px;
   height: 100px;
+}
+
+.display-question {
+  width: 70%;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.display-answer {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
 }
 </style>
