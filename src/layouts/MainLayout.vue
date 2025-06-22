@@ -73,7 +73,9 @@ function questionsChoose() {
   border-radius: 20px;
   box-shadow: rgba(156, 156, 156, 0.66) 2px 2px 10px;
   margin: 20px;
-  font-size: 40px;
+  padding: 5vh 5vw;
+  --mulpiple: calc(100vh + 100vw);
+  font-size: calc(var(--mulpiple) / 78);
   transition: all 0.3s ease;
   background-color: white;
   color: black;
@@ -82,11 +84,6 @@ function questionsChoose() {
 .button:hover {
   background-color: #569565;
   color: white;
-}
-
-.big-button {
-  width: 400px;
-  height: 100px;
 }
 
 .display-question {
